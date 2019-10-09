@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.LoadItems;
 import model.Loadout;
 import model.Soldier;
 
@@ -53,13 +54,13 @@ public class NavigationServlet extends HttpServlet {
 
 			try {
 				Integer Item_Id = Integer.parseInt(request.getParameter("id"));
-				ListItem itemToDelete = lih.searchForItemById(Item_Id);
-				lih.deleteItem(itemToDelete);
+				Soldier soldierToDelete = sh.searchForSoldierById(Item_Id);
+				sh.deleteSoldier(soldierToDelete);
 
 			} catch (NumberFormatException e) {
 				System.out.println("Forgot to click a button");
 			} finally {
-				getServletContext().getRequestDispatcher("/viewAllItemsServlet").forward(request, response);
+				getServletContext().getRequestDispatcher("/").forward(request, response);
 			}
 
 		} else if (act.equals("addLoadout")) {
@@ -77,13 +78,13 @@ public class NavigationServlet extends HttpServlet {
 
 			try {
 				Integer Item_Id = Integer.parseInt(request.getParameter("id"));
-				ListItem itemToDelete = lih.searchForItemById(Item_Id);
-				lih.deleteItem(itemToDelete);
+				Loadout loadoutToDelete = lh.searchForLoadoutById(Item_Id);
+				lh.deleteLoadout(loadoutToDelete);
 
 			} catch (NumberFormatException e) {
 				System.out.println("Forgot to click a button");
 			} finally {
-				getServletContext().getRequestDispatcher("/viewAllItemsServlet").forward(request, response);
+				getServletContext().getRequestDispatcher("/").forward(request, response);
 			}
 
 		} else if (act.equals("addItem")) {
@@ -91,23 +92,23 @@ public class NavigationServlet extends HttpServlet {
 		} else if (act.equals("editItem")) {
 			try {
 				Integer tempId = Integer.parseInt(request.getParameter("id"));
-				Soldier soldierToEdit = sh.searchForSoldierById(tempId);
-				request.setAttribute("soldierToEdit", soldierToEdit);
-				getServletContext().getRequestDispatcher("/editSoldier.jsp").forward(request, response);
+				LoadItems itemToEdit = lih.searchForLoadItemsById(tempId);
+				request.setAttribute("itemToEdit", itemToEdit);
+				getServletContext().getRequestDispatcher("/editItem.jsp").forward(request, response);
 			} catch (NumberFormatException e) {
-				getServletContext().getRequestDispatcher("/viewAllCarsServlet").forward(request, response);
+				getServletContext().getRequestDispatcher("/").forward(request, response);
 			}
 		} else if (act.equals("deleteItem")) {
 
 			try {
 				Integer Item_Id = Integer.parseInt(request.getParameter("id"));
-				ListItem itemToDelete = lih.searchForItemById(Item_Id);
+				LoadItems itemToDelete = lih.searchForLoadItemsById(Item_Id);
 				lih.deleteItem(itemToDelete);
 
 			} catch (NumberFormatException e) {
 				System.out.println("Forgot to click a button");
 			} finally {
-				getServletContext().getRequestDispatcher("/viewAllItemsServlet").forward(request, response);
+				getServletContext().getRequestDispatcher("/").forward(request, response);
 			}
 
 		}
