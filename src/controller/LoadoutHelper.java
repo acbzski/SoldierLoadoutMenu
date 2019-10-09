@@ -41,6 +41,14 @@ public class LoadoutHelper {
 		em.close();
 	}
 	
+	public Loadout searchForLoadoutById(int idToEdit) {
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		Loadout found = em.find(Loadout.class, idToEdit);
+		em.close();
+		return found;
+	}
+	
 	public List<Loadout> showAllLoadouts() {
 		EntityManager em = emfactory.createEntityManager();
 		List<Loadout> allLoadouts = em.createQuery("SELECT l FROM Loadout l").getResultList();

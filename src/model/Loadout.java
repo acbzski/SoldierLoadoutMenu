@@ -12,16 +12,15 @@ import javax.persistence.Table;
 public class Loadout {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "loadout_ID")
+	@Column(name = "LOADOUT_ID")
 	private int loadout_id;
-	@Column(name = "loadout_name")
+	@Column(name = "LOADOUT_NAME")
 	private String loadout_name;
-	@Column(name = "soldier_id")
+	@Column(name = "SOLDIER_ID")
 	private String soldier_id;
 
 	public Loadout() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Loadout(String loadout_name, int loadout_id) {

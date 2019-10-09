@@ -42,6 +42,14 @@ public class LoadItemsHelper {
 		em.close();
 	}
 	
+	public LoadItems searchForLoadItemsById(int idToEdit) {
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		LoadItems found = em.find(LoadItems.class, idToEdit);
+		em.close();
+		return found;
+	}
+	
 	public List<LoadItems> showAllItems() {
 		EntityManager em = emfactory.createEntityManager();
 		List<LoadItems> allItems = em.createQuery("SELECT l FROM LoadItems l").getResultList();

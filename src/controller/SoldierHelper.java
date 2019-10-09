@@ -42,6 +42,14 @@ public class SoldierHelper {
 		em.close();
 	}
 	
+	public Soldier searchForSoldierById(int idToEdit) {
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		Soldier found = em.find(Soldier.class, idToEdit);
+		em.close();
+		return found;
+	}
+	
 	public List<Soldier> showAllSoldiers() {
 		EntityManager em = emfactory.createEntityManager();
 		List<Soldier> allSoldiers = em.createQuery("SELECT s FROM Soldier s").getResultList();
