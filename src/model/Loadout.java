@@ -13,9 +13,9 @@ public class Loadout {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "loadout_ID")
-	private int loudout_id;
-	@Column(name = "loudout_name")
-	private String loudout_name;
+	private int loadout_id;
+	@Column(name = "loadout_name")
+	private String loadout_name;
 	@Column(name = "soldier_id")
 	private String soldier_id;
 
@@ -24,26 +24,26 @@ public class Loadout {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Loadout(String loudout_name, int loudout_id) {
+	public Loadout(String loadout_name, int loadout_id) {
 		super();
-		this.loudout_name = loudout_name;
-		this.loudout_id = loudout_id;
+		this.loadout_name = loadout_name;
+		this.loadout_id = loadout_id;
 	}
 
-	public int getLoudout_id() {
-		return loudout_id;
+	public int getLoadout_id() {
+		return loadout_id;
 	}
 
-	public void setLoudout_id(int loudout_id) {
-		this.loudout_id = loudout_id;
+	public void setLoadout_id(int loadout_id) {
+		this.loadout_id = loadout_id;
 	}
 
-	public String getLoudout_name() {
-		return loudout_name;
+	public String getLoadout_name() {
+		return loadout_name;
 	}
 
-	public void setLoudout_name(String loudout_name) {
-		this.loudout_name = loudout_name;
+	public void setLoadout_name(String loadout_name) {
+		this.loadout_name = loadout_name;
 	}
 
 	public String getSoldier_id() {
@@ -56,7 +56,7 @@ public class Loadout {
 
 	@Override
 	public String toString() {
-		return "Loadout [id=" + loudout_id + ", store=" + loudout_name + ", item=" + soldier_id + "]";
+		return "Loadout [id=" + loadout_id + ", name=" + loadout_name + ", soldier id=" + soldier_id + "]";
 	}
 
 }
