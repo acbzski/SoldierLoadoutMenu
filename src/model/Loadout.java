@@ -26,7 +26,7 @@ public class Loadout {
 	private String loadout_name;
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="ITEM_ID")
-	private int item_id;
+	private LoadItems loaditems;
 	@OneToMany(cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
 	@JoinTable(name="LOAD_ASSIGNMENT",
 			joinColumns={ @JoinColumn(name="LOADOUT_ID", referencedColumnName="LOADOUT_ID") },
@@ -59,12 +59,12 @@ public class Loadout {
 		this.loadout_name = loadout_name;
 	}
 
-	public int getItem_id() {
-		return item_id;
+	public LoadItems getLoaditems() {
+		return loaditems;
 	}
 
-	public void setItem_id(int item_id) {
-		this.item_id = item_id;
+	public void setLoaditems(LoadItems loaditems) {
+		this.loaditems = loaditems;
 	}
 
 	public List<LoadItems> getListOfItems() {
@@ -77,7 +77,7 @@ public class Loadout {
 
 	@Override
 	public String toString() {
-		return "Loadout [loadout_id=" + loadout_id + ", loadout_name=" + loadout_name + ", item_id=" + item_id
+		return "Loadout [loadout_id=" + loadout_id + ", loadout_name=" + loadout_name + ", Loaditems=" + loaditems
 				+ ", listOfItems=" + listOfItems + "]";
 	}
 }

@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Soldier Page</title>
 </head>
 <body>
@@ -16,11 +16,11 @@
 	</form>
 	<form method="post" action="navigationServlet">
 		<table>
-			<c:forEach items="${requestScope.allSoldiers}" var="currentitem">
+			<c:forEach items="${requestScope.allSoldiers}" var="currentsoldier">
 				<tr>
-					<td><input type="radio" name="id" value="${currentitem.id}"></td>
-					<td>${currentitem.soldier}</td>
-					<td>${currentitem.birthdate}</td>
+					<td><input type="radio" name="id" value="${currentsoldier.id}"></td>
+					<td>${currentsoldier.name}</td>
+					<td>${currentsoldier.birthdate}</td>
 				</tr>
 			</c:forEach>
 		</table>
