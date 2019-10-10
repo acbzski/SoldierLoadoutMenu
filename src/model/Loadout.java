@@ -1,10 +1,18 @@
 package model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,8 +24,14 @@ public class Loadout {
 	private int loadout_id;
 	@Column(name = "LOADOUT_NAME")
 	private String loadout_name;
-	@Column(name = "SOLDIER_ID")
-	private String soldier_id;
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="ITEM_ID")
+	private int item_id;
+	@OneToMany(cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+	@JoinTable(name="LOAD_ASSIGNMENT",
+			joinColumns={ @JoinColumn(name="LOADOUT_ID", referencedColumnName="LOADOUT_ID") },
+			inverseJoinColumns={ @JoinColumn(name="ITEM_ID", referencedColumnName="ITEM_ID", unique=true) })
+	private List<LoadItems> listOfItems;
 
 	public Loadout() {
 		super();
@@ -45,17 +59,25 @@ public class Loadout {
 		this.loadout_name = loadout_name;
 	}
 
-	public String getSoldier_id() {
-		return soldier_id;
+	public int getItem_id() {
+		return item_id;
 	}
 
-	public void setSoldier_id(String soldier_id) {
-		this.soldier_id = soldier_id;
+	public void setItem_id(int item_id) {
+		this.item_id = item_id;
+	}
+
+	public List<LoadItems> getListOfItems() {
+		return listOfItems;
+	}
+
+	public void setListOfItems(List<LoadItems> listOfItems) {
+		this.listOfItems = listOfItems;
 	}
 
 	@Override
 	public String toString() {
-		return "Loadout [id=" + loadout_id + ", name=" + loadout_name + ", soldier id=" + soldier_id + "]";
+		return "Loadout [loadout_id=" + loadout_id + ", loadout_name=" + loadout_name + ", item_id=" + item_id
+				+ ", listOfItems=" + listOfItems + "]";
 	}
-
 }
