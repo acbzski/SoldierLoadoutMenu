@@ -39,37 +39,49 @@ public class NavigationServlet extends HttpServlet {
 		LoadItemsHelper lih = new LoadItemsHelper();
 		String act = request.getParameter("doThis");
 
-		while (act != null) {
+		//while (act != null) {
 		
 			/****** VIEWS ******/
-			if (act.equals("View Soldiers")) {
-				request.setAttribute("allSoldiers", sh.showAllSoldiers());
-				if (sh.showAllSoldiers().isEmpty()) {
-					request.setAttribute("allSoldiers", " ");
-				}
-				getServletContext().getRequestDispatcher("/CreateSoldier.jsp").forward(request, response);
-				act = null;
-			} else if (act.equals("View Loadouts")) {
+			if (act.equals("View Loadouts")) {
 				getServletContext().getRequestDispatcher("/CreateLoadout.jsp").forward(request, response);
 			} else if (act.equals("View Items")) {
 				getServletContext().getRequestDispatcher("/CreateItems.jsp").forward(request, response);
 			}
 		
-			/****** SOLDIER ACTIONS ******/
-			else if (act.equals("Add Soldier")) {
-				String name = request.getParameter("name");
+			/****** LOADOUT ACTIONS ******/
+			else if (act.equals("Add Loadout")) {
+				//pull information for soldier object
+				String soldierName = request.getParameter("soldierName");
 				String month = request.getParameter("month");
 				String day = request.getParameter("day");
 				String year = request.getParameter("year");
 				LocalDate bd;
+				//parse date into LocalDate format
 				try {
 					bd = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
 				} catch (NumberFormatException ex) {
 					bd = LocalDate.now();
 				}
-				Soldier s = new Soldier(name, bd);
-				sh.insertSoldier(s);
-				act = "View Soldiers";
+				
+				//pull information for loadout object
+				String loadName = request.getParameter("loadoutName");
+				String[] selectedItems = request.getParameterValues("allItemsToAdd");
+				List<LoadItems> selectedItemsInList = new ArrayList<LoadItems>();
+				//populate list with loaditems objects
+				if (selectedItems !=null && selectedItems.length > 0) {
+					for (int i=0; i<selectedItems.length; i++) {
+						LoadItems li = lih.searchForLoadItemsById(Integer.parseInt(selectedItems[i]));
+						selectedItemsInList.add(li);
+					}
+				}
+				
+				//create objects and insert into table
+				Soldier soldier = new Soldier(soldierName, bd);
+				Loadout load = new Loadout(loadName, soldier);
+				load.setListOfItems(selectedItemsInList);
+				lh.insertLoadout(load);
+
+				getServletContext().getRequestDispatcher("/CreateLoadout.jsp").forward(request, response);
 			}
 			else if (act.equals("Edit Soldier")) {
 				try {
@@ -92,22 +104,8 @@ public class NavigationServlet extends HttpServlet {
 					getServletContext().getRequestDispatcher("/").forward(request, response);
 				}
 			}
-		
-			/****** LOADOUT ACTIONS ******/
 			else if (act.equals("Add Loadout")) {
-				String name = request.getParameter("name");
-				String[] selectedItems = request.getParameterValues("allItemsToAdd");
-				List<LoadItems> selectedItemsInList = new ArrayList<LoadItems>();
-			
-				if (selectedItems !=null && selectedItems.length > 0) {
-					for (int i=0; i<selectedItems.length; i++) {
-						System.out.println(selectedItems[i]);
-						LoadItems li = lih.searchForLoadItemsById(Integer.parseInt(selectedItems[i]));
-						selectedItemsInList.add(li);
-					}
-				}
-			
-				getServletContext().getRequestDispatcher("/CreateLoadout.jsp").forward(request, response);
+
 			} else if (act.equals("Edit Loadout")) {
 				try {
 					Integer tempId = Integer.parseInt(request.getParameter("id"));
@@ -157,6 +155,6 @@ public class NavigationServlet extends HttpServlet {
 					getServletContext().getRequestDispatcher("/").forward(request, response);
 				}
 			}
-		}
+		//}
 	}
 }

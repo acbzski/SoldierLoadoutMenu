@@ -16,17 +16,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "loadout")
+@Table(name="loadout")
 public class Loadout {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "LOADOUT_ID")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="LOADOUT_ID")
 	private int loadout_id;
-	@Column(name = "LOADOUT_NAME")
+	@Column(name="LOADOUT_NAME")
 	private String loadout_name;
 	@ManyToOne(cascade=CascadeType.PERSIST)
-	@JoinColumn(name="ITEM_ID")
-	private LoadItems loaditems;
+	@JoinColumn(name="SOLDIER_ID")
+	private Soldier soldier;
 	@OneToMany(cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
 	@JoinTable(name="LOAD_ASSIGNMENT",
 			joinColumns={ @JoinColumn(name="LOADOUT_ID", referencedColumnName="LOADOUT_ID") },
@@ -37,10 +37,22 @@ public class Loadout {
 		super();
 	}
 
-	public Loadout(String loadout_name, int loadout_id) {
-		super();
-		this.loadout_name = loadout_name;
+	public Loadout (int loadout_id, String loadout_name, Soldier soldier, List<LoadItems> listOfItems) {
 		this.loadout_id = loadout_id;
+		this.loadout_name = loadout_name;
+		this.soldier = soldier;
+		this.listOfItems = listOfItems;
+	}
+	
+	public Loadout (String loadout_name, Soldier soldier, List<LoadItems> listOfItems) {
+		this.loadout_name = loadout_name;
+		this.soldier = soldier;
+		this.listOfItems = listOfItems;
+	}
+	
+	public Loadout (String loadout_name, Soldier soldier) {
+		this.loadout_name = loadout_name;
+		this.soldier = soldier;
 	}
 
 	public int getLoadout_id() {
@@ -59,12 +71,12 @@ public class Loadout {
 		this.loadout_name = loadout_name;
 	}
 
-	public LoadItems getLoaditems() {
-		return loaditems;
+	public Soldier getSoldier() {
+		return soldier;
 	}
 
-	public void setLoaditems(LoadItems loaditems) {
-		this.loaditems = loaditems;
+	public void setSoldier(Soldier soldier) {
+		this.soldier = soldier;
 	}
 
 	public List<LoadItems> getListOfItems() {
@@ -77,7 +89,7 @@ public class Loadout {
 
 	@Override
 	public String toString() {
-		return "Loadout [loadout_id=" + loadout_id + ", loadout_name=" + loadout_name + ", Loaditems=" + loaditems
+		return "Loadout [loadout_id=" + loadout_id + ", loadout_name=" + loadout_name + ", soldier=" + soldier
 				+ ", listOfItems=" + listOfItems + "]";
 	}
 }
