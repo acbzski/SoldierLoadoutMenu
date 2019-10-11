@@ -27,7 +27,7 @@ Available items:<br />
 <table>
 <c:forEach items="${requestScope.allLoadouts}" var="currentloadout">
 	<tr><td><input type="radio" name="id" value="${currentloadout.loadout_id}"></td>
-		<td><h2>${currentloadout.loadoutName}</h2></td></tr>
+		<td><h2>${currentloadout.loadout_name}</h2></td></tr>
 	<tr><td colspan="3">Soldier: ${currentloadout.soldier.name}</td></tr>
 	<tr><td colspan="3">Soldier Birthdate: ${currentloadout.soldier.birthdate}</td></tr>
 	<c:forEach var="listVal" items="${currentloadout.listOfItems}">

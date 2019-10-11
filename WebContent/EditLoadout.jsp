@@ -8,6 +8,7 @@
 </head>
 <body>
 <form action="NavigationServlet" method="post">
+<input type="hidden" name="id" value="${loadoutToEdit.loadout_id}">
 Loadout Name:<input type="text" name="loadoutName" value="${loadoutToEdit.loadout_name}"><br />
 Soldier Name:<input type="text" name="soldierName" value="${loadoutToEdit.soldier.name}"><br />
 Soldier Birthdate:<input type="text" name="month" placeholder="mm" size="3" value="${loadoutToEdit.soldier.birthdate.getMonthValue()}">
@@ -21,5 +22,6 @@ Available items:<br />
 </select><br />
 <input type="submit" value="Submit Edited Loadout" name="doThis"> 
 </form>
+<a href="CreateLoadout.jsp">Go back - I don't want to edit!</a>
 </body>
 </html>

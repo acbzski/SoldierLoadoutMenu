@@ -99,6 +99,7 @@ public class NavigationServlet extends HttpServlet {
 					Integer tempId = Integer.parseInt(request.getParameter("id"));
 					Loadout loadoutToEdit = lh.searchForLoadoutById(tempId);
 					request.setAttribute("loadoutToEdit", loadoutToEdit);
+					request.setAttribute("allItems", lih.showAllItems());
 					getServletContext().getRequestDispatcher("/EditLoadout.jsp").forward(request, response);
 				} catch (NumberFormatException e) {
 					System.out.println("Forgot to select a loadout to edit!");

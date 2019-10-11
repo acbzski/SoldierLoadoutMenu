@@ -13,5 +13,6 @@ Weight:<input type="number" name="weight" value="${itemToEdit.weight}">
 <input type="hidden" name="id" value="${itemToEdit.id}">
 <input type="submit" value="Submit Edited Item" name="doThis">
 </form>
+<a href="CreateItems.jsp">Go back - I don't want to edit!</a>
 </body>
 </html>
