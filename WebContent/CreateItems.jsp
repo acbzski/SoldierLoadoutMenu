@@ -4,29 +4,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Loadout Items</title>
 </head>
 <body>
-
-	<form action="NavigationServlet" method="post">
-		Description: <input type="text" name="description">
-		 Weight: <input type="date" name="weight"> 
-		 <input type="submit" value="Add Item" name = "doThis">
-	</form>
-
-	<form method="post" action="navigationServlet">
-		<table>
-			<c:forEach items="${requestScope.allItems}" var="currentitem">
-				<tr>
-					<td><input type="radio" name="id" value="${currentitem.id}"></td>
-					<td>${currentitem.description}</td>
-					<td>${currentitem.weight}</td>
-				</tr>
-			</c:forEach>
-		</table>
-		<input type="submit" value="Edit Item" name="doThis"> <input
-			type="submit" value="Delete Item" name="doThis">
-	</form>
-
+<form action="NavigationServlet" method="post">
+Description: <input type="text" name="description">
+Weight (in ounces): <input type="number" name="weight"> 
+<input type="submit" value="Add Item" name = "doThis">
+</form>
+<!-- ******************************** LIST VIEWER **************************** -->
+<form method="post" action="NavigationServlet">
+<table>
+<c:forEach items="${requestScope.allItems}" var="currentitem">
+<tr>
+	<td><input type="radio" name="id" value="${currentitem.id}"></td>
+	<td>${currentitem.description}</td>
+	<td>${currentitem.weight} oz</td>
+</tr>
+</c:forEach>
+</table>
+<input type="submit" value="Edit Item" name="doThis">
+<input type="submit" value="Delete Item" name="doThis">
+</form>
+<a href="index.html">Return to main page</a>
 </body>
 </html>

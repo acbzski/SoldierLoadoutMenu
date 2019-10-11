@@ -4,32 +4,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Edit Loadout Page</title>
 </head>
 <body>
-
-<form action = "editExistingListServlet" method="post">
-Trip Name: <input type ="text" name = "listName" value="${listToEdit.listName}"><br />
-Trip date: <input type ="text" name = "month" placeholder="mm" size="4" value="${listToEdit.tripDate.getMonthValue()}"> <input type ="text" name = "day" placeholder="dd" size="4" value="${listToEdit.tripDate.getDayOfMonth()}">, <input type ="text" name = "year" placeholder="yyyy" size="4" value="${listToEdit.tripDate.getYear()}">
-Traveler Name: <input type = "text" name = "shopperName" value="${listToEdit.shopper.shopperName}"><br />
-<input type = "hidden" name = "id" value="${listToEdit.id}">
-Current Destinations:<br />
-<select name="currentItems" multiple size="6">
-<c:forEach var = "listVal" items = "${listToEdit.listOfItems}">
-          <option value = "${listVal.id}">${listVal.store} | ${listVal.item}</option>          
-  </c:forEach>
-</select>
-<br />
-Remaining Destinations:<br />
-<select name="itemsToAdd" multiple size="6">
-<c:forEach items="${requestScope.allItemsToAdd}" var="currentitem">
-   <option value = "${currentitem.id}">${currentitem.store} | ${currentitem.item}</option>
+<form action="NavigationServlet" method="post">
+Loadout Name:<input type="text" name="loadoutName" value="${loadoutToEdit.loadout_name}"><br />
+Soldier Name:<input type="text" name="soldierName" value="${loadoutToEdit.soldier.name}"><br />
+Soldier Birthdate:<input type="text" name="month" placeholder="mm" size="3" value="${loadoutToEdit.soldier.birthdate.getMonthValue()}">
+	<input type="text" name="day" placeholder="dd" size="3" value="${loadoutToEdit.soldier.birthdate.getDayOfMonth()}">, 
+	<input type="text" name="year" placeholder="yyyy" size="4" value="${loadoutToEdit.soldier.birthdate.getYear()}">
+Available items:<br />
+<select name="allItems" multiple size="6">
+<c:forEach items="${requestScope.allItems}" var="currentitem">
+	<option value="${currentitem.id}">${currentitem.description} ${currentitem.weight} oz</option>
 </c:forEach>
-</select>
-
-<br />
-<input type = "submit" value="Edit List" name = "doThis">
+</select><br />
+<input type="submit" value="Submit Edited Loadout" name="doThis"> 
 </form>
-
 </body>
 </html>

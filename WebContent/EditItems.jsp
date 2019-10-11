@@ -4,16 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Edit Item Page</title>
 </head>
 <body>
-
-<form action = "editItemServlet" method="post">
-Soldier: <input type ="text" name = "store" value= "${itemToEdit.description}">
-Birthdate: <input type = "text" name = "item" value= "${itemToEdit.weight}">
-<input type = "hidden" name = "id" value="${itemToEdit.id}">
-<input type = "submit" value="Edit Item" name = "doThis">
+<form action="NavigationServlet" method="post">
+Description:<input type="text" name="description" value="${itemToEdit.description}">
+Weight:<input type="number" name="weight" value="${itemToEdit.weight}">
+<input type="hidden" name="id" value="${itemToEdit.id}">
+<input type="submit" value="Submit Edited Item" name="doThis">
 </form>
-
 </body>
 </html>
