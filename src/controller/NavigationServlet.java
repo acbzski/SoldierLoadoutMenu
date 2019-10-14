@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +53,7 @@ public class NavigationServlet extends HttpServlet {
 				}
 				act = null;
 				getServletContext().getRequestDispatcher("/CreateLoadout.jsp").forward(request, response);
-			} else if (act.equals("View Items")) {
+			} else if (act.equals("View Equipment")) {
 				//add items to table
 				request.setAttribute("allItems", lih.showAllItems());
 				if (lih.showAllItems().isEmpty()) {
@@ -69,18 +70,17 @@ public class NavigationServlet extends HttpServlet {
 				String month = request.getParameter("month");
 				String day = request.getParameter("day");
 				String year = request.getParameter("year");
-				LocalDate bd;
 				//parse date into LocalDate format
+				LocalDate bd;
 				try {
 					bd = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
-				} catch (NumberFormatException ex) {
+				} catch (NumberFormatException e) {
 					bd = LocalDate.now();
 				}
 				//pull information for loadout object
 				String loadName = request.getParameter("loadoutName");
-				String[] selectedItems = request.getParameterValues("allItemsToAdd");
+				String[] selectedItems = request.getParameterValues("allItems");
 				List<LoadItems> selectedItemsInList = new ArrayList<LoadItems>();
-				//populate list with loaditems objects
 				if (selectedItems !=null && selectedItems.length > 0) {
 					for (int i=0; i<selectedItems.length; i++) {
 						LoadItems li = lih.searchForLoadItemsById(Integer.parseInt(selectedItems[i]));
@@ -122,7 +122,7 @@ public class NavigationServlet extends HttpServlet {
 				Soldier soldier = new Soldier(soldierName, bd);
 				//pull information for loadout object
 				String loadName = request.getParameter("loadoutName");
-				String[] selectedItems = request.getParameterValues("allItemsToAdd");
+				String[] selectedItems = request.getParameterValues("allItems");
 				List<LoadItems> selectedItemsInList = new ArrayList<LoadItems>();
 				//populate list with loaditems objects
 				if (selectedItems !=null && selectedItems.length > 0) {
@@ -162,7 +162,7 @@ public class NavigationServlet extends HttpServlet {
 				LoadItems l = new LoadItems(desc, weight);
 				lih.insertItem(l);
 				//refresh page
-				act = "View Items";
+				act = "View Equipment";
 			} else if (act.equals("Edit Item")) {
 				try {
 					Integer tempId = Integer.parseInt(request.getParameter("id"));
@@ -173,7 +173,7 @@ public class NavigationServlet extends HttpServlet {
 					System.out.println("Forgot to select an item to edit!");					
 				} finally {
 					//reset view conditional statement
-					act = "View Items";
+					act = "View Equipment";
 				}
 			} else if (act.equals("Submit Edited Item")) {
 				String desc = request.getParameter("description");
@@ -185,7 +185,7 @@ public class NavigationServlet extends HttpServlet {
 				itemToEdit.setWeight(weight);
 				lih.editItem(itemToEdit);
 				//reset view conditional statement
-				act = "View Items";
+				act = "View Equipment";
 			} else if (act.equals("Delete Item")) {
 				try {
 					Integer Item_Id = Integer.parseInt(request.getParameter("id"));
@@ -194,7 +194,7 @@ public class NavigationServlet extends HttpServlet {
 				} catch (NumberFormatException e) {
 					System.out.println("Forgot to select an item to delete!");
 				} finally {
-					act = "View Items";
+					act = "View Equipment";
 				}
 			}
 		}

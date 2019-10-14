@@ -4,43 +4,69 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Loadout Page</title>
+<title>Loadout View/Create Page</title>
+<style>
+body{
+ background-image:url(https://i.imgur.com/j8Hd5eh.jpg?1);
+ background-size:cover;
+ color:white;
+ text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+ text-align: center;
+ font-family: sans-serif;
+}
+h1{
+ font-family: 'Octin Spraypaint', sans-serif;
+ font-size: 300%;
+}
+form{
+ border:5px solid white;
+ border-radius: 20px;
+}
+a, a:visited{
+ color:white;
+ background-color:black;
+ border-radius:2px;
+ text-decoration:none;
+ font-family:sans-serif;
+ border:2px solid white;
+}
+</style>
 </head>
 <body>
 <form action="NavigationServlet" method="post">
-Loadout Name:<input type="text" name="loadoutName"><br />
-Soldier Name:<input type="text" name="soldierName"><br />
-Soldier Birthdate:<input type="text" name="month" placeholder="mm" size="3">
-	<input type="text" name="day" placeholder="dd" size="3">, 
-	<input type="text" name="year" placeholder="yyyy" size="4">
-Available items:<br />
-<select name="allItems" multiple size="6">
+<h1>CREATE LOADOUT</h1>
+Loadout Name: <input type="text" name="loadoutName"><br />
+Soldier Name: <input type="text" name="soldierName"><br />
+Soldier Birthdate: <input type="number" name="month" placeholder="M" min="1" max="12">
+	<input type="number" name="day" placeholder="D" min="1" max="31">, 
+	<input type="number" name="year" placeholder="Y" min="1900" max="2019"><br />
+Available equipment:<br />
+<select name="allItems" multiple size="5">
 <c:forEach items="${requestScope.allItems}" var="currentitem">
-	<option value="${currentitem.id}">${currentitem.description} ${currentitem.weight} oz</option>
+	<option value="${currentitem.id}">${currentitem.description} ${currentitem.weight} oz.</option>
 </c:forEach>
 </select><br />
+<p>Hold down the Ctrl (Windows) / Command (Mac) button to select multiple options.</p>
 <input type="submit" value="Add Loadout" name="doThis"> 
-</form>
-<a href="CreateItems.jsp">Add new items instead</a>
+</form><br />
 <!-- ********************** VIEWER SECTION **************************** -->
 <form method="post" action="NavigationServlet">
+<h1>EXISTING LOADOUTS</h1>
 <table>
 <c:forEach items="${requestScope.allLoadouts}" var="currentloadout">
 	<tr><td><input type="radio" name="id" value="${currentloadout.loadout_id}"></td>
-		<td><h2>${currentloadout.loadout_name}</h2></td></tr>
-	<tr><td colspan="3">Soldier: ${currentloadout.soldier.name}</td></tr>
+		<td><h2 colspan="3">${currentloadout.loadout_name}</h2></td></tr>
+	<tr><td colspan="3">Soldier Name: ${currentloadout.soldier.name}</td></tr>
 	<tr><td colspan="3">Soldier Birthdate: ${currentloadout.soldier.birthdate}</td></tr>
-	<c:forEach var="listVal" items="${currentloadout.listOfItems}">
-		<tr><td></td><td colspan="3">
-			${listVal.description} | ${listVal.weight} oz
-			</td>
-		</tr>
+	<c:forEach items="${currentloadout.listOfItems}" var="listVal">
+		<tr><td colspan="3">${listVal.description} - ${listVal.weight} oz.</td></tr>
 	</c:forEach>
 </c:forEach>
 </table>
 <input type="submit" value="Edit Loadout" name="doThis">
 <input type="submit" value="Delete Loadout" name="doThis">
-</form>
+</form><br />
+<a href="CreateItems.jsp">Add new equipment instead</a>
 <a href="index.html">Return to main page</a>
 </body>
 </html>
