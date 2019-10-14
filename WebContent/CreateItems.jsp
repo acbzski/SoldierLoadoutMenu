@@ -22,14 +22,6 @@ form{
  border:5px solid white;
  border-radius: 20px;
 }
-a, a:visited{
- color:white;
- background-color:black;
- border-radius:5px;
- text-decoration:none;
- font-family:sans-serif;
- border:2px solid white;
-}
 </style>
 </head>
 <body>
@@ -52,8 +44,8 @@ Weight: <input type="number" name="weight"> oz.
 </c:forEach>
 </table>
 <input type="submit" value="Edit Item" name="doThis">
-<input type="submit" value="Delete Item" name="doThis">
+<input type="submit" value="Delete Item" name="doThis"><br />
 </form><br />
-<a href="index.html">Return to main page</a>
+<input type="button" onclick="location.href='index.html';" value="Return to Home Page"/>
 </body>
 </html>

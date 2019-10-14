@@ -22,15 +22,12 @@ form{
  border:5px solid white;
  border-radius: 20px;
 }
-a, a:visited{
- color:white;
- background-color:black;
- border-radius:5px;
- text-decoration:none;
- font-family:sans-serif;
- border:2px solid white;
-}
 </style>
+<script>
+function goBack(){
+ window.history.back();
+}
+</script>
 </head>
 <body>
 <form action="NavigationServlet" method="post">
@@ -47,8 +44,8 @@ Available items:<br />
 	<option value="${currentitem.id}">${currentitem.description} ${currentitem.weight} oz.</option>
 </c:forEach>
 </select><br />
-<input type="submit" value="Submit Edited Loadout" name="doThis"> 
-</form><br />
-<a href="CreateLoadout.jsp">Go back - I don't want to edit!</a>
+<input type="submit" value="Submit Edited Loadout" name="doThis"><br />
+<button onclick="goBack()">Go back - I don't want to edit!</button>
+</form>
 </body>
 </html>
