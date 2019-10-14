@@ -56,9 +56,9 @@ Available equipment:<br />
 </c:forEach>
 </table>
 <input type="submit" value="Edit Loadout" name="doThis">
-<input type="submit" value="Delete Loadout" name="doThis"><br />
+<input type="submit" value="Delete Loadout" name="doThis">
+<input type="submit" value="View Equipment" name="doThis"><br />
 </form><br />
-<input type="submit" value="View Equipment" name="doThis">
 <input type="button" onclick="location.href='index.html';" value="Return to Home Page"/>
 </body>
 </html>
