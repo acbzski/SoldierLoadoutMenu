@@ -36,7 +36,7 @@ Description: <input type="text" name="description" value="${itemToEdit.descripti
 Weight: <input type="number" name="weight" value="${itemToEdit.weight}"> oz.
 <input type="hidden" name="id" value="${itemToEdit.id}">
 <input type="submit" value="Submit Edited Item" name="doThis"><br />
-<button onclick="goBack()">Go back - I don't want to edit!</button>
 </form>
+<button onclick="goBack()">Go back - I don't want to edit!</button>
 </body>
 </html>

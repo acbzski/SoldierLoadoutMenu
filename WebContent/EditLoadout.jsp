@@ -45,7 +45,7 @@ Available items:<br />
 </c:forEach>
 </select><br />
 <input type="submit" value="Submit Edited Loadout" name="doThis"><br />
-<button onclick="goBack()">Go back - I don't want to edit!</button>
 </form>
+<button onclick="goBack()">Go back - I don't want to edit!</button>
 </body>
 </html>
